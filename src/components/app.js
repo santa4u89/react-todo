@@ -1,6 +1,6 @@
 import React from 'react';
 import TodosList from './todos-list';
-import CreateTodo from './create-todo'
+import CreateTodo from './create-todo';
 
 const todos = [
     {
@@ -19,6 +19,7 @@ class App extends React.Component {
         this.createTask = this.createTask.bind(this);
         this.toggleTask = this.toggleTask.bind(this);
         this.saveTask = this.saveTask.bind(this);
+        this.deleteTask = this.deleteTask.bind(this);
 
         this.state = {
             todos
@@ -42,16 +43,25 @@ class App extends React.Component {
 
     saveTask(oldTask, newTask) {
         const foundTodo = _.find(this.state.todos, todo => todo.task === oldTask);
-        foundTodo.task = !foundTodo.newTask;
-        this.setState({ todos: this.state.task });
+        foundTodo.task = newTask;
+        this.setState({ todos: this.state.todos });
+    }
+
+    deleteTask(taskToDelete) {
+        _.remove(this.state.todos, todo => todo.task === taskToDelete);
+        this.setState({ todos: this.state.todos });
     }
 
     render() {
         return (
             <div>
                 <h1>React ToDo App</h1>
-                <CreateTodo createTask={this.createTask} />
-                <TodosList todos={this.state.todos} toggleTask={this.toggleTask} saveTask={this.saveTask} />
+                <CreateTodo todos={this.state.todos} createTask={this.createTask} />
+                <TodosList
+                    todos={this.state.todos}
+                    toggleTask={this.toggleTask}
+                    saveTask={this.saveTask}
+                    deleteTask={this.deleteTask} />
             </div>
         );
     }

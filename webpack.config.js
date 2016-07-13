@@ -1,5 +1,4 @@
 let webpack = require('webpack');
-let path = require('path');
 
 module.exports = {
     devtool: 'inline-source-map',
@@ -9,8 +8,8 @@ module.exports = {
         './src'
     ],
     output: {
-        path: path.join(__dirname, 'public'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        path: __dirname + '/dist'
     },
     resolve: {
         modulesDirectories: ['node_modules', 'src'],
@@ -19,8 +18,8 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
+                test: /\.js$/,
+                include: __dirname + '/src',
                 loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
             }
         ]

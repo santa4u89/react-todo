@@ -43,7 +43,7 @@ class TodosListItem extends React.Component {
         return (
             <div className="todos-actions">
                 <button className="todos-actions__buttons" onClick={this.onEditClick}>Edit</button>
-                <button className="todos-actions__buttons">Delete</button>
+                <button className="todos-actions__buttons" onClick={this.props.deleteTask.bind(this, this.props.task)}>Delete</button>
             </div>
         )
     }
